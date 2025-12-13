@@ -1,0 +1,9 @@
+###
+POST http://localhost:8080/tx/transfer
+Content-Type: application/json
+
+{
+  "fromAccountId": "myId",
+  "toAccountId": "friendId",
+  "amount": 400000
+}

@@ -28,6 +28,10 @@ public class TransferTxOutbox {
     @Column(name = "amount", nullable = false)
     private Long amount;
 
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private SagaRequestStatus status;
+
     @CreatedDate
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -43,7 +47,7 @@ public class TransferTxOutbox {
     }
 
     public static TransferTxOutbox of(TransferRequestDto dto) {
-        return new TransferTxOutbox(dto.getTid(), dto.getFromAccountId(), dto.getToAccountId(), dto.getAmount(), null, null);
+        return new TransferTxOutbox(dto.getTid(), dto.getFromAccountId(), dto.getToAccountId(), dto.getAmount(), SagaRequestStatus.REQUESTED, null, null);
     }
 }
 

@@ -1,6 +1,8 @@
-create table TransferTxOutbox (
+create table transfer_tx_outbox (
     tid varchar(36) primary key,
-    fromAccount varchar(14) not null,
-    toAccount varchar(14) not null,
-    amount bigint not null
+    from_account_id varchar(14) not null,
+    to_account_id varchar(14) not null,
+    amount bigint not null,
+    created_at timestamp not null,
+    expire_at timestamp not null
 );

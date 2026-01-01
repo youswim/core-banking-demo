@@ -1,9 +1,6 @@
 package org.example.txcommandapi.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.example.txcommandapi.dto.TransferRequestDto;
@@ -19,17 +16,23 @@ import java.time.LocalDateTime;
 public class TransferTxOutbox {
 
     @Id
+    @Column(name = "tid")
     private String tid;
 
+    @Column(name = "from_account_id", nullable = false)
     private String fromAccountId;
 
+    @Column(name = "to_account_id", nullable = false)
     private String toAccountId;
 
+    @Column(name = "amount", nullable = false)
     private Long amount;
 
     @CreatedDate
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @Column(name = "expire_at", nullable = false)
     private LocalDateTime expireAt;
 
     @PrePersist

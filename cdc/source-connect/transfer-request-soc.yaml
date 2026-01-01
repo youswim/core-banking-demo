@@ -1,0 +1,43 @@
+{
+  "name": "postgres-outbox-transfer-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "postgres",
+    "database.server.name": "banking",
+    "table.include.list": "public.transfer_tx_outbox",
+    "plugin.name": "pgoutput",
+
+    "tombstones.on.delete": "false",
+
+    "transforms": "unwrap,valuetokey,extractkey",
+
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.add.fields": "op,table,lsn,source.ts_ms",
+
+    "transforms.valuetokey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+    "transforms.valuetokey.fields": "from_account_id",
+
+    "transforms.extractkey.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+    "transforms.extractkey.field": "from_account_id",
+
+    "topic.prefix": "cdc",
+
+    "topic.creation.default.replication.factor": 1,
+    "topic.creation.default.partitions": 3,
+
+    "transforms.unwrap.delete.handling.mode": "none",
+
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",
+
+    "errors.tolerance": "all",
+    "errors.log.enable": true,
+    "errors.deadletterqueue.topic.name": "dlq.tombstone"
+  }
+}

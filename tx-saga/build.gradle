@@ -18,7 +18,12 @@ repositories {
 	mavenCentral()
 }
 
+bootJar.enabled = true
+jar.enabled = false
+
 dependencies {
+	implementation(project(":tx-common"))
+
 	implementation 'org.springframework.boot:spring-boot-starter-kafka'
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
 	implementation 'org.projectlombok:lombok'

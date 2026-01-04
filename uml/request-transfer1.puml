@@ -1,0 +1,20 @@
+https://plantuml.com/ko-dark/sequence-diagram
+@startuml
+actor User
+participant TxCommandApi
+participant batch
+database OutboxDB
+participant CDC
+queue Kafka
+participant TxSagaManager
+
+User->TxCommandApi: 송금 요청
+TxCommandApi->OutboxDB: 송금 요청 저장
+CDC->OutboxDB: 송금 요청 INSERT 감지
+CDC->Kafka: 송금요청 이벤트 발행
+TxSagaManager->Kafka: 송금 요청 sub
+TxSagaManager->TxSagaManager: 송금 사가 시작
+TxSagaManager->Kafka: 송금 요청 ack
+TxCommandApi->Kafka: 송금 요청 ack sub
+TxCommandApi->OutboxDB: 송금 요청 ack 저장
+@enduml

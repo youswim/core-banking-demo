@@ -1,6 +1,6 @@
 package org.example.txcommandapi.dto;
 
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -8,15 +8,15 @@ import java.util.UUID;
 @Getter
 public class TransferRequestDto {
 
-    @Column(name = "tid")
+    @JsonProperty("tid")
     private final String tid = UUID.randomUUID().toString();
 
-    @Column(name = "from_account_id")
+    @JsonProperty("fromAccountId")
     private String fromAccountId;
 
-    @Column(name = "from_account_id")
+    @JsonProperty("toAccountId")
     private String toAccountId;
 
-    @Column(name = "tid")
+    @JsonProperty("amount")
     private Long amount;
 }

@@ -1,4 +1,5 @@
 rootProject.name = 'core-banking-demo'
+include "tx-balance"
 include "tx-command-api"
 include "tx-saga-manager"
 include "tx-common"

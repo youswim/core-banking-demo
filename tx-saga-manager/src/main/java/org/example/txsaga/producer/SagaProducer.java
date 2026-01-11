@@ -1,4 +1,4 @@
-package org.example.txsaga.consumer;
+package org.example.txsaga.producer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

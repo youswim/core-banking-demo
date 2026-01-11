@@ -3,7 +3,7 @@ package org.example.txsaga.service;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.example.txcommon.balance.BalanceUpdateRequestDto;
-import org.example.txsaga.consumer.SagaProducer;
+import org.example.txsaga.producer.SagaProducer;
 import org.example.txsaga.dto.TransferTxOutbox;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

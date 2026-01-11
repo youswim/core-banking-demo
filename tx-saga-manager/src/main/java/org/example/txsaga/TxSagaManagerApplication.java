@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TxSagaApplication {
+public class TxSagaManagerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TxSagaApplication.class, args);
+		SpringApplication.run(TxSagaManagerApplication.class, args);
 	}
 
 }

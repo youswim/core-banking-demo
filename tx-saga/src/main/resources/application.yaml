@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: "tx-saga"
-server:
-  port: 8081
-kafka:
-  bootstrap-servers: "192.168.55.195:9092"
-  topic:
-    txRequest: cdc.transfer_tx_outbox

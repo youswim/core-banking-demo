@@ -26,4 +26,14 @@ public class TxRequestConsumer {
 
     }
 
+//    @KafkaListener(topics = "${kafka.topic.tx-request}", groupId = "tx-saga-manager", concurrency = "3", containerFactory = "containerFactory")
+//    public void processTxRequest(ConsumerRecord<String, String> record) {
+//
+//        log.info("consumed. topic : {}, key : {}, value : {}", record.topic(), record.key(), record.value());
+//
+//        var payload = CommonUtil.commonMapper.readValue(record.value(), TransferTxOutbox.class);
+//        sagaProcessor.processTransfer(payload);
+//
+//    }
+
 }

@@ -1,0 +1,11 @@
+@startuml
+actor User
+participant TxCommandApi
+participant batch
+database OutboxDB
+participant CDC
+queue Kafka
+participant TxSagaManager
+
+batch->OutboxDB: 일정 시간 간격으로 처리중
+@enduml

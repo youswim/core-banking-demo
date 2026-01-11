@@ -1,0 +1,12 @@
+https://plantuml.com/ko-dark/sequence-diagram
+트랜잭션 잔고 업데이트 실패 시
+@startuml
+participant TxSagaManager
+participant Balance
+participant Ledger
+participant notification
+
+TxSagaManager->Balance: 잔고 업데이트 요청
+Balance->TxSagaManager: 잔고 업데이트 실패
+TxSagaManager->notification: 폰앱 알림
+@enduml

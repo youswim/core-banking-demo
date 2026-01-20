@@ -28,10 +28,9 @@ public class BalanceUpdateRequestConsumer {
 
         log.info("consumed. topic : {}, key : {}, value : {}", record.topic(), record.key(), record.value());
 
-        var payload = CommonUtil.commonMapper.readValue(record.value(), BalanceUpdateRequestDto.class);
-        balanceProcessor.processUpdate(payload);
+        balanceProcessor.processUpdate(record);
 
-        balanceProducer.produce(successTopic, new ProducerRecord<>(successTopic, payload.getTid()));
+//        balanceProducer.produce(successTopic, new ProducerRecord<>(successTopic, payload.getTid()));
 
     }
 

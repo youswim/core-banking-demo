@@ -10,3 +10,8 @@ insert into balance
 values ('friendId', 5000000)
 
 select * from balance
+
+create table last_offset (
+    topic_partition varchar primary key,
+    last_offset bigint not null
+)

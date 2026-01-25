@@ -18,7 +18,10 @@ public class LastOffset {
     @Column(name = "last_offset")
     private Long lastOffset;
 
-    public static LastOffset of(String topicPartition, Long offset) {
-        return new LastOffset(topicPartition, offset);
+    @Column(name = "tid")
+    private String tid;
+
+    public static LastOffset of(String topicPartition, Long offset, String tid) {
+        return new LastOffset(topicPartition, offset, tid);
     }
 }

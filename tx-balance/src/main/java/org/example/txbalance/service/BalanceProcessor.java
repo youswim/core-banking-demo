@@ -33,7 +33,7 @@ public class BalanceProcessor {
 
         toBalance.deposit(dto.getAmount());
 
-        lastOffsetRepository.save(LastOffset.of(record.topic() + "-" + record.partition(), record.offset()));
+        lastOffsetRepository.save(LastOffset.of(record.topic() + "-" + record.partition(), record.offset(), dto.getTid()));
 
     }
 

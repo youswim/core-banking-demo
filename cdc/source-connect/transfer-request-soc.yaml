@@ -13,10 +13,14 @@
 
     "tombstones.on.delete": "false",
 
-    "transforms": "unwrap,valuetokey,extractkey",
+    "transforms": "unwrap,filter,valuetokey,extractkey",
 
     "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
     "transforms.unwrap.add.fields": "op,table,lsn,source.ts_ms",
+
+    "transforms.filter.type": "io.debezium.transforms.Filter",
+    "transforms.filter.language": "jsr223.groovy",
+    "transforms.filter.condition": "value.op == 'c'",
 
     "transforms.valuetokey.type": "org.apache.kafka.connect.transforms.ValueToKey",
     "transforms.valuetokey.fields": "from_account_id",

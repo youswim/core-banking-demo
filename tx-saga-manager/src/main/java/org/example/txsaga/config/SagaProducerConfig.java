@@ -39,7 +39,7 @@ public class SagaProducerConfig {
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JacksonJsonSerializer.class);
 
-        props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "tx-producer-1");
+        props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "saga-manager-producer-");
         props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
         props.put(ProducerConfig.ACKS_CONFIG, "all");
         props.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "5");

@@ -9,6 +9,7 @@
     "database.dbname": "postgres",
     "database.server.name": "banking",
     "table.include.list": "public.balance_last_offset",
+    "slot.name": "balance_last_offset-connector",
     "plugin.name": "pgoutput",
 
     "tombstones.on.delete": "false",

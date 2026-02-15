@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class LastOffset {
+public class BalanceLastOffset {
 
     @Id
     @Column(name = "topic_partition")
@@ -21,7 +21,7 @@ public class LastOffset {
     @Column(name = "tid")
     private String tid;
 
-    public static LastOffset of(String topicPartition, Long offset, String tid) {
-        return new LastOffset(topicPartition, offset, tid);
+    public static BalanceLastOffset of(String topicPartition, Long offset, String tid) {
+        return new BalanceLastOffset(topicPartition, offset, tid);
     }
 }

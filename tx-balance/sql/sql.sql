@@ -11,7 +11,10 @@ values ('friendId', 5000000)
 
 select * from balance
 
-create table last_offset (
+create table balance_last_offset (
     topic_partition varchar primary key,
-    last_offset bigint not null
+    last_offset bigint not null,
+    tid varchar not null
 )
+
+select * from balance_last_offset

@@ -1,5 +1,19 @@
 spring:
   application:
     name: "tx-ledger"
+  datasource:
+    url: jdbc:postgresql://192.168.55.195:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
 server:
   port: 8083
+
+kafka:
+  bootstrap-servers: "192.168.55.195:29092"
+  topic:
+    ledger-update-request: ledger.update.request

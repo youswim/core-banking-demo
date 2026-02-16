@@ -8,3 +8,6 @@ kafka:
   topic:
     tx-request: cdc.public.transfer_tx_outbox
     balance-update-request: balance.update.request
+    balance-update-success: cdc.public.balance_last_offset
+
+    ledger-update-request: ledger.update.request

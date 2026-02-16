@@ -24,4 +24,16 @@ public class SagaProducer {
         });
     }
 
+//    public void produce(String topic, ProducerRecord<String, Object> producerRecord, Runnable runnable) {
+//
+//        kafkaTemplate.send(producerRecord).whenCompleteAsync((res, ex) -> {
+//            if (ex == null) {
+//                log.info("send success. topic : {}, res : {}", topic, res);
+//                runnable.run();
+//                return;
+//            }
+//            log.error("send failed. topic : {}, payload : {}", topic, producerRecord, ex);
+//        });
+//    }
+
 }

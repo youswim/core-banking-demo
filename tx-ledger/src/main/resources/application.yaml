@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: "tx-ledger"
+server:
+  port: 8083

@@ -29,4 +29,17 @@ public class LedgerResultConsumer {
          */
 
     }
+
+    @KafkaListener(topics = "${kafka.topic.balance-update-failed}", groupId = "tx-saga-manager", concurrency = "3", containerFactory = "containerFactory")
+    public void updateLedgerFailed(ConsumerRecord<String, String> record) {
+
+        log.info("consumed. topic : {}, key : {}, value : {}", record.topic(), record.key(), record.value());
+
+        sagaProcessor.rollbackBalance(record);
+
+        /*
+        캐시에 저장해둔 요청 정보를 조회하여 원장 update요청에 사용하면 좋을 듯
+         */
+
+    }
 }

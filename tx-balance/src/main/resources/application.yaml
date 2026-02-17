@@ -17,3 +17,4 @@ kafka:
   topic:
     balance-update-request: balance.update.request
     balance-update-success: balance.update.success
+    balance-update-rollback: balance.update.rollback

@@ -8,7 +8,10 @@ kafka:
   topic:
     tx-request: cdc.public.transfer_tx_outbox
     balance-update-request: balance.update.request
+    balance-update-rollback: balance.update.rollback
+    balance-rollback-success: cdc.public.balance_rollback_last_offset
     balance-update-success: cdc.public.balance_last_offset
+    balance-update-failed: ledger.update.failed
 
     ledger-update-request: ledger.update.request
     ledger-update-success: cdc.public.ledger_last_offset

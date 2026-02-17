@@ -17,3 +17,4 @@ kafka:
   bootstrap-servers: "192.168.55.195:29092"
   topic:
     ledger-update-request: ledger.update.request
+    ledger-update-failed: ledger.update.failed

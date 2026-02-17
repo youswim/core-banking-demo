@@ -6,6 +6,7 @@ import org.example.txcommon.balance.BalanceUpdateRequestDto;
 import org.example.txsaga.cache.RequestInfoCache;
 import org.example.txsaga.dto.BalanceSucceeded;
 import org.example.txsaga.dto.LedgerRequested;
+import org.example.txsaga.dto.LedgerSucceeded;
 import org.example.txsaga.producer.SagaProducer;
 import org.example.txsaga.dto.TransferTxOutbox;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +21,9 @@ public class SagaProcessor {
 
     @Value("${kafka.topic.ledger-update-request}")
     private String ledgerUpdateRequestTopic;
+
+    @Value("${kafka.topic.transfer-result-noti}")
+    private String resultNotiTopic;
 
     private final SagaProducer sagaProducer;
     private final RequestInfoCache requestInfoCache;
@@ -37,6 +41,14 @@ public class SagaProcessor {
         LedgerRequested ledgerRequested = new LedgerRequested(transferRequested.getTid(), transferRequested.getFromAccountId(), transferRequested.getToAccountId(), transferRequested.getAmount());
 
         sagaProducer.produce(ledgerUpdateRequestTopic, new ProducerRecord<>(ledgerUpdateRequestTopic, ledgerRequested.fromAccountId(), ledgerRequested));
+
+    }
+
+    public void sendNoti(LedgerSucceeded ledgerSucceeded) {
+
+        TransferTxOutbox transferRequested = requestInfoCache.select(ledgerSucceeded.tid());
+
+        sagaProducer.produce(resultNotiTopic, new ProducerRecord<>(resultNotiTopic, transferRequested.getFromAccountId(), transferRequested));
 
     }
 

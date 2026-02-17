@@ -24,8 +24,7 @@ public class LedgerUpdateRequestConsumer {
 
         log.info("consumed. topic : {}, key : {}, value : {}", record.topic(), record.key(), record.value());
 
-        var ledgerRequested = CommonUtil.commonMapper.readValue(record.value(), LedgerRequested.class);
-        ledgerProcessor.updateLedger(ledgerRequested);
+        ledgerProcessor.updateLedger(record);
 
 //        balanceProducer.produce(successTopic, new ProducerRecord<>(successTopic, payload.getTid()));
 

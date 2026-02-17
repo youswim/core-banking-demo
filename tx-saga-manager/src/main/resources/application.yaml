@@ -11,3 +11,6 @@ kafka:
     balance-update-success: cdc.public.balance_last_offset
 
     ledger-update-request: ledger.update.request
+    ledger-update-success: cdc.public.ledger_last_offset
+
+    transfer-result-noti: result.transfer

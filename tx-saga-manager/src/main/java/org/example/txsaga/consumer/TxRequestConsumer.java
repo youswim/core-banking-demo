@@ -25,6 +25,10 @@ public class TxRequestConsumer {
 
         var payload = CommonUtil.commonMapper.readValue(record.value(), TransferTxOutbox.class);
 
+//        if (payload.getAmount().equals(444L)) {
+//            throw new RuntimeException("테스트에러");
+//        }
+
         requestInfoCache.save(payload);
 
         sagaProcessor.processTransfer(payload);

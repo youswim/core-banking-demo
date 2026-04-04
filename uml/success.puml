@@ -1,0 +1,52 @@
+https://plantuml.com/ko-dark/sequence-diagram
+@startuml
+actor User
+participant TxCommandApi
+participant batch
+database transfer_tx_outbox
+participant CDC1
+queue cdc.public.transfer_tx_outbox
+participant TxSagaManager
+database cache
+queue balance.update.request
+participant Balance
+database balance
+database balance_last_offset
+participant CDC2
+queue cdc.public.balance_last_offset
+
+queue ledger.update.request
+participant Ledger
+database ledger
+database ledger_offset
+participant CDC3
+queue cdc.public.ledger_last_offset
+
+queue result.transfer
+
+User->TxCommandApi: 송금 요청
+TxCommandApi->transfer_tx_outbox: 송금 요청 저장
+CDC1->transfer_tx_outbox: 송금 요청 INSERT 감지
+CDC1->cdc.public.transfer_tx_outbox: 송금요청 이벤트 pub
+TxSagaManager->cdc.public.transfer_tx_outbox: 송금 요청 sub
+TxSagaManager->cache: 송금 요청 정보 캐시
+TxSagaManager->balance.update.request: 잔고 업데이트 이벤트 pub
+
+Balance->balance.update.request: 잔고 업데이트 이벤트 sub
+Balance->balance: 잔고 업데이트
+Balance->balance_last_offset: balance.update.request토픽 offset, tid 저장
+CDC2->balance_last_offset: 잔고 업데이트 성공 감지
+CDC2->cdc.public.balance_last_offset: 잔고 업데이트 성공 이벤트 pub
+TxSagaManager->cdc.public.balance_last_offset: 잔고 업데이트 성공 이벤트 sub
+
+TxSagaManager->cache: 송금 요청 정보 캐시 조회
+TxSagaManager->ledger.update.request: 장부 업데이트 요청 이벤트 pub
+Ledger->ledger.update.request: 장부 업데이트 요청 이벤트 sub
+Ledger->ledger: 장부 업데이트
+Ledger->ledger_offset: ledger.update.request토픽 offset, tid 저장
+CDC3->ledger_offset: 장부 업데이트 성공 감지
+CDC3->cdc.public.ledger_last_offset: 장부 업데이트 성공 이벤트 pub
+TxSagaManager->cdc.public.ledger_last_offset: 장부 업데이트 성공 이벤트 sub
+
+TxSagaManager->result.transfer: 송금 성공 사용자 알림 이벤트 pub
+@enduml
